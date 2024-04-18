@@ -345,7 +345,8 @@ class Machine(MaasValueMapper):
                 MachineTaskState.failed_testing.value,
             ]:
                 raise errors.MaasError(
-                    f"Machine - {maas_dict['hostname']} - Failed to commission or deploy"
+                    status_message = maas_dict.get('status_message', None)
+                    f"Machine - {maas_dict['hostname']} failed to commission or deploy with the following message: {status_message}"
                 )
             sleep(10)
 
